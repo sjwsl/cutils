@@ -1,6 +1,6 @@
 # cutils
 
-Some c++ utility functions like random, hash, thread...
+Some c++ utility functions including random, hash, thread...
 
 - header-only
 - c++11 is sufficient and required
