@@ -24,7 +24,7 @@ void PrintVector(const T& t) {
     std::cout << "\n";
 }
 
-void sleep_ms(size_t ms) {
+void SleepForMs(size_t ms) {
     timeval timeout;
     timeout.tv_sec = ms / 1000;
     timeout.tv_usec = ms % 1000 * 1000;
