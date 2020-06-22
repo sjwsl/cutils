@@ -17,3 +17,16 @@ using UniPtr = std::unique_ptr<T>;
 
 template<typename T>
 using UniPtrVec = std::vector<std::unique_ptr<T>>;
+
+template<typename T>
+void PrintVector(const T& t) {
+    std::copy(t.cbegin(), t.cend(), std::ostream_iterator<typename T::value_type>(std::cout, ", "));
+    std::cout << "\n";
+}
+
+void sleep_ms(size_t ms) {
+    timeval timeout;
+    timeout.tv_sec = ms / 1000;
+    timeout.tv_usec = ms % 1000 * 1000;
+    ::select(0, NULL, NULL, NULL, &timeout);
+}
