@@ -7,6 +7,8 @@
 #include "rob.h"
 #include "timer.h"
 
+namespace cutils {
+
 template<typename T, typename... Args>
 std::unique_ptr<T> make_unique(Args&&... args) {
     return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
@@ -30,3 +32,5 @@ void SleepForMs(size_t ms) {
     timeout.tv_usec = ms % 1000 * 1000;
     ::select(0, NULL, NULL, NULL, &timeout);
 }
+
+} // namespace cutils
