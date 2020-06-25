@@ -20,7 +20,7 @@ public:
     void pushFront(const T &value)
     {
         auto *node = new Node<T>(value);
-        std::lock_guard<mutex> lock(mtx);
+        std::lock_guard<std::mutex> lock(mtx);
         node->next = head;
         head = node;
     }
