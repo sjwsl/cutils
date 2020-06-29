@@ -33,4 +33,18 @@ void SleepForMs(size_t ms) {
     ::select(0, NULL, NULL, NULL, &timeout);
 }
 
+#define AppendColorStr(result, color, fmt, ...) { \
+    char sch[1024]; \
+    if (strcmp((color), "red") == 0) { \
+        sprintf(sch, "\033[31m" fmt "\033[0m", ##__VA_ARGS__); \
+    } else if (strcmp((color), "green") == 0) { \
+        sprintf(sch, "\033[32m" fmt "\033[0m", ##__VA_ARGS__); \
+    } else if (strcmp((color), "yellow") == 0) { \
+        sprintf(sch, "\033[33m" fmt "\033[0m", ##__VA_ARGS__); \
+    } else { \
+        sprintf(sch, fmt, ##__VA_ARGS__); \
+    } \
+    result.append(sch); \
+}
+
 } // namespace cutils
