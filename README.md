@@ -1,7 +1,7 @@
 # cutils
 
-Some c++ utility functions including random, hash, thread...
+Some C++ utility functions including random, hash, thread...
 
 - C++11 is sufficient and required
-- All functions are tested in Linux, should work fine on Posix.
+- Only tested and guaranteed to work on Linux.
 - Built with [Bazel](https://github.com/bazelbuild/bazel)
