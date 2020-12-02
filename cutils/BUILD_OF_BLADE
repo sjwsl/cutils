@@ -1,0 +1,62 @@
+
+cc_library(
+    target_bases = ["mmcomm",],
+    name = "cutils",
+    srcs = [
+        "async_worker.cpp",
+        "coding.cpp",
+        "cutils.cpp",
+        "file.cpp",
+        "freq_ctrl.cpp",
+        "random.cpp",
+    ],
+    deps = [
+        "#pthread",
+    ],
+    extra_cppflags = [
+        "-std=c++11",
+    ],
+    export_incs = [
+        ".",
+    ],
+)
+
+cc_library(
+    target_bases = ["mmcomm",],
+    name = "crc32c",
+    srcs = [
+        "crc32c.cpp",
+    ],
+    deps = [
+        ":cutils",
+    ],
+    extra_cppflags = [
+        "-std=c++11",
+        "-DHAVE_SSE42",
+        "-msse4.2",
+        "-mpclmul",
+    ],
+    export_incs = [
+        ".",
+    ],
+)
+
+cc_binary(
+    target_bases = ["mmcomm",],
+    name = "test",
+    srcs = [
+        "test.cpp",
+    ],
+    deps = [
+        ":cutils",
+        ":crc32c",
+    ],
+    extra_cppflags = [
+        "-std=c++11",
+    ],
+    extra_linkflags = [
+    ],
+    export_incs = [
+        ".",
+    ],
+)
