@@ -145,6 +145,24 @@ inline std::string Slice::ToHexString() const {
     return ::cutils::ToHexString(*this);
 }
 
+inline std::string ParseFromHexString(const Slice& s) {
+    if (s.size() % 2 != 0) return "";
+    std::string res;
+    res.resize(s.size() / 2);
+    auto convert_char = [](char c) -> uint8_t {
+        if (c >= '0' && c <= '9') return c - '0';
+        if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+        return 255;
+    };
+    for (size_t i = 0; i + 2 < s.size(); i += 2) {
+        auto x = convert_char(s[i]);
+        auto y = convert_char(s[i + 1]);
+        if (x == 255 || y == 255) return "";
+        res[i / 2] = (char)((x << 4) | y);
+    }
+    return res;
+}
+
 inline bool IsPrintable(const Slice& s) {
     bool ok = true;
     for (size_t i = 0; i < s.size() && ok; ++i) {
@@ -168,3 +186,7 @@ public:
 };
 
 } // namespace std;
+
+
+
+
